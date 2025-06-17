@@ -1,12 +1,15 @@
 
-let lastPeriodStr = "2023-07-23"; 
-let cycleLength = 28;            
+let lastPeriodStr = "2023-07-23";
+let cycleLength = 28;             
 let periodLength = 6;             
+
+
 let lastPeriod = new Date(lastPeriodStr);
 
 
 let nextPeriod = new Date(lastPeriod);
 nextPeriod.setDate(lastPeriod.getDate() + cycleLength);
+
 
 let ovulationDay = new Date(nextPeriod);
 ovulationDay.setDate(nextPeriod.getDate() - 14);
@@ -32,9 +35,9 @@ safeStart2.setDate(fertileEnd.getDate() + 1);
 let safeEnd2 = new Date(nextPeriod);
 safeEnd2.setDate(nextPeriod.getDate() - 1);
 
-
 console.log("---- Menstrual Cycle Details ----");
-console.log("Next period starts:", nextPeriod.toDateString());
+console.log("Last Period Start Date:", lastPeriod.toDateString());
+console.log("Next Period Starts:", nextPeriod.toDateString());
 console.log("Ovulation Day:", ovulationDay.toDateString());
 console.log("Fertile Window:", fertileStart.toDateString(), "to", fertileEnd.toDateString());
 console.log("Safe Periods:");
