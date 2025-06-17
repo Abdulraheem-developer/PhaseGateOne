@@ -1,39 +1,55 @@
+try:
+    cst_name = input("What is the customer's name?: ")
+    if not cst_name:
+        raise ValueError("Customer name is required.")
 
-cst_name = input("What is the customer's name?: ")
+    item = input("What did the user buy?: ")
+    if not item:
+        raise ValueError("Item name is required.")
 
+    quantity = int(input("How many pieces?: "))
+    unit_price = float(input("How much per unit?: "))
 
-item = input("What did the user buy?: ")
-quantity = int(input("How many pieces?: "))
-unit_price = float(input("How much per unit?: "))
+    request = input("Add more items?: ").lower()
+    if not request:
+        raise ValueError("Request input is required.")
 
-
-request = input("Add more items?: ")
+except ValueError as e:
+    print("Input Error:", e)
+    
 
 
 item2 = ""
 quantity2 = 0
-unit_price2 = 0
+unit_price2 = 0.0
 
+if request == "yes":
+    try:
+        item2 = input("What did the user buy?: ")
+        if not item2:
+            raise ValueError("Second item name is required.")
+        
+        quantity2 = int(input("How many pieces?: "))
+        unit_price2 = float(input("How much per unit?: "))
+    except ValueError as e:
+        print("Second Item Input Error:", e)
+        exit()
 
-if request.lower() == "yes":
-    item2 = input("What did the user buy?: ")
-    quantity2 = int(input("How many pieces?: "))
-    unit_price2 = float(input("How much per unit?: "))
+try:
+    cashiers_name = input("What is your name?: ")
+    if not cashiers_name:
+        raise ValueError("Cashier name is required.")
 
+    discount = float(input("How much discount will he get?: "))
+    if discount < 0:
+        raise ValueError("Discount can't be negative.")
+except ValueError as e:
+    print("Input Error:", e)
+    
 
-cashiers_name = input("What is your name?: ")
-
-
-discount = float(input("How much discount will he get?: "))
 
 item_total = quantity * unit_price
-
-
-item_total2 = 0
-if request.lower() == "yes":
-    item_total2 = quantity2 * unit_price2
-
-
+item_total2 = quantity2 * unit_price2 if request == "yes" else 0
 subtotal_before_discount = item_total + item_total2
 discount_amount = subtotal_before_discount * (discount / 100)
 subtotal = subtotal_before_discount - discount_amount
@@ -47,27 +63,4 @@ print("TEL: 03293828343")
 print("Date: 18-Dec-22 8:48:11 pm")
 print("Cashier:", cashiers_name)
 print("Customer Name:", cst_name)
-print("====================================================")
-print("ITEM\t\tQTY\tPRICE\t\tTOTAL(NGN)")
-print("----------------------------------------------------")
-print(item + "\t\t" + str(quantity) + "\t" + str(unit_price) + "\t\t" + str(item_total))
-
-
-if request.lower() == "yes":
-    print(item2 + "\t\t" + str(quantity2) + "\t" + str(unit_price2) + "\t\t" + str(item_total2))
-
-print("----------------------------------------------------")
-print("\t\t\tSub Total:\t", subtotal_before_discount)
-print("\t\t\tDiscount:\t", discount_amount)
-print("\t\t\tVAT @ 7.50%:\t", vat)
-print("====================================================")
-print("\t\t\tBill Total:\t", bill_total)
-print("====================================================")
-print("THIS IS NOT A RECEIPT KINDLY PAY", bill_total)
-print("====================================================")
-
-
-amount_paid = float(input("How much did the customer give to you?: "))
-change = amount_paid - bill_total
-print("Amount Paid:", amount_paid)
-print("Balance:", change)
+print("================================================
